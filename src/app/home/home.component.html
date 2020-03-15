@@ -1,0 +1,43 @@
+<div class="d-flex container flex-align justify-content-center align-items-center">
+  <table class="d-flex flex-grow-1 table table-dark"
+    >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of pokemons.results; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td style="text-transform: capitalize;">{{ data.name }}</td>
+        <td>
+          <button mat-raised-button
+            i18n
+            color="primary"
+            class="btn-success mr-2"
+            (click)="clickPokemon(data.url)">
+            info
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button *ngIf="pokemons.previous !== null" mat-raised-button
+    i18n
+    color="primary"
+    class="btn-action mr-2"
+    (click)="onClickPrev(pokemons.previous)">
+    <i class="glyphicon info mr-3"></i>
+    Previous
+  </button>
+  <button *ngIf="pokemons.next !== null" mat-raised-button
+    i18n
+    color="primary"
+    class="btn-action mr-2"
+    (click)="onClickNext(pokemons.next)">
+    <i class="glyphicon info mr-3"></i>
+    Next
+  </button>
+</div>

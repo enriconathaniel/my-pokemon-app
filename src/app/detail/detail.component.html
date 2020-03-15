@@ -1,0 +1,65 @@
+<div *ngIf="isLoading"
+    class="d-flex justify-content-center btn-action">
+    <mat-progress-spinner color="primary"
+      mode="indeterminate"
+      diameter="36">
+    </mat-progress-spinner>
+</div>
+<div *ngIf="!isLoading" class="MainPageElement mp-green">
+  <div class="mp-banner">
+    <h2><span class="mw-headline"
+        id="Featured_Pok.C3.A9mon">Featured Pokémon</span></h2>
+    <div class="caption">
+      <table style="border:1px solid; text-align:left; margin-bottom:20px; width:250px">
+        <tbody>
+          <tr>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="center">
+                <img src="{{ detail.sprites.front_default }}" alt="">
+              </div>
+            </td>
+          </tr>
+          <tr style="text-transform: capitalize;">
+            <b>Name:</b>  {{ detail.name }}
+          </tr>
+          <tr>
+            <td><b>Height:</b> {{ detail.height }}
+            </td>
+          </tr>
+          <tr>
+            <td><b>Weight:</b> {{ detail.weight }}
+            </td>
+          </tr>
+          <tr>
+            <td><b>Type(s):</b> 
+                <ul style="margin: 0;">
+                    <li *ngFor="let data of detail.types" style="text-transform: capitalize;">
+                        {{data.type.name}}
+                    </li>
+                </ul>
+                <!-- <span *ngFor="let data of detail.types" style="text-transform: capitalize;">
+                    {{data.type.name}}
+                </span> -->
+            </td>
+          </tr>
+          <tr>
+            <td> <b>Abilities:</b> 
+                <ul style="margin: 0;">
+                    <li *ngFor="let data of detail.abilities" style="text-transform: capitalize;">
+                        {{data.ability.name}}
+                    </li>
+                </ul>
+                <!-- <span *ngFor="let data of detail.abilities" style="text-transform: capitalize;">
+                    {{data.ability.name}}
+                </span> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
