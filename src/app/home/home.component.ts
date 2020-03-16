@@ -12,15 +12,39 @@ import { Subject } from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
   onDestroy$ = new Subject<void>();
   pokemons: any;
+  pokemonFilter: any;
+  type: any;
   constructor(private dialog: MatDialog, private http: HttpClient) { }
 
   ngOnInit() {
     this.pokemons = this.http.get('https://pokeapi.co/api/v2/pokemon').
     subscribe(
       (data: any) => {
-      this.pokemons = data;
-      console.log(this.pokemons);
+        this.pokemons = data;
+        this.type = this.http.get('https://pokeapi.co/api/v2/type').
+        subscribe(
+          (dataType: any) => {
+            this.type = dataType;
+        });
     });
+  }
+
+  filterType(typeName: any) {
+    if (typeName === '0') {
+      this.pokemonFilter = null;
+      this.pokemons = this.http.get('https://pokeapi.co/api/v2/pokemon').
+      subscribe(
+        (data: any) => {
+          this.pokemons = data;
+      });
+    } else {
+      this.pokemons = null;
+      this.pokemonFilter = this.http.get('https://pokeapi.co/api/v2/type/' + typeName).
+      subscribe(
+        (data: any) => {
+          this.pokemonFilter = data.pokemon;
+      });
+    }
   }
 
   clickPokemon(href: string) {
@@ -36,7 +60,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     subscribe(
       (data: any) => {
       this.pokemons = data;
-      console.log(this.pokemons);
     });
   }
 
@@ -45,7 +68,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     subscribe(
       (data: any) => {
       this.pokemons = data;
-      console.log(this.pokemons);
     });
   }
 

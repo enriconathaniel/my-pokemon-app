@@ -1,43 +1,78 @@
 <div class="d-flex container flex-align justify-content-center align-items-center">
-  <table class="d-flex flex-grow-1 table table-dark"
-    >
-    <thead>
+  <h2 style="text-align: center; margin: 1px;">Pokemon List</h2>
+  <div style="text-align: center; font-size: large;">
+    <label>Type: </label>
+    <select (change)="filterType($event.target.value)">
+      <option value="0">--All--</option>
+      <option *ngFor="let typePokemon of type.results"
+        value={{typePokemon.name}}>
+        {{typePokemon.name}}
+      </option>
+    </select>
+  </div>
+  <table class="table"
+    style="width: 500px; margin: auto; border: 1px solid; text-align: center;">
+    <thead style="background-color: powderblue;">
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th>&nbsp;</th>
+        <th>#</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of pokemons.results; let i = index">
-        <th scope="row">{{i + 1}}</th>
-        <td style="text-transform: capitalize;">{{ data.name }}</td>
+      <ng-container *ngIf="this.pokemons">
+        <tr *ngFor="let data of pokemons.results; let i = index">
+          <td style="text-transform: capitalize; width: 50%;">{{ data.name }}</td>
+          <td style="width: 50%;">
+            <button mat-raised-button
+              i18n
+              color="primary"
+              class="btn-success mr-2"
+              style="height: 25px"
+              (click)="clickPokemon(data.url)">
+              info
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="pokemonFilter">
+        <tr *ngFor="let data of pokemonFilter; let i = index">
+          <td style="text-transform: capitalize; width: 50%;">{{ data.pokemon.name }}</td>
+          <td style="width: 50%;">
+            <button mat-raised-button
+              i18n
+              color="primary"
+              class="btn-success mr-2"
+              style="height: 25px"
+              (click)="clickPokemon(data.pokemon.url)">
+              info
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="pokemons">
         <td>
-          <button mat-raised-button
+          <button *ngIf="pokemons.previous !== null"
+            mat-raised-button
             i18n
-            color="primary"
-            class="btn-success mr-2"
-            (click)="clickPokemon(data.url)">
-            info
+            style="background-color: limegreen; width: 100%;"
+            class="d-flex mr-2"
+            (click)="onClickPrev(pokemons.previous)">
+            <i class="glyphicon info mr-3"></i>
+            Previous
+          </button>
+        </td>
+        <td>
+          <button *ngIf="pokemons.next !== null"
+            mat-raised-button
+            i18n
+            style="background-color: limegreen; width: 100%;"
+            class="d-flex mr-2"
+            (click)="onClickNext(pokemons.next)">
+            <i class="glyphicon info mr-3"></i>
+            Next
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-  <button *ngIf="pokemons.previous !== null" mat-raised-button
-    i18n
-    color="primary"
-    class="btn-action mr-2"
-    (click)="onClickPrev(pokemons.previous)">
-    <i class="glyphicon info mr-3"></i>
-    Previous
-  </button>
-  <button *ngIf="pokemons.next !== null" mat-raised-button
-    i18n
-    color="primary"
-    class="btn-action mr-2"
-    (click)="onClickNext(pokemons.next)">
-    <i class="glyphicon info mr-3"></i>
-    Next
-  </button>
 </div>

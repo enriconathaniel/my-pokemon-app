@@ -1,61 +1,103 @@
 <div *ngIf="isLoading"
-    class="d-flex justify-content-center btn-action">
-    <mat-progress-spinner color="primary"
-      mode="indeterminate"
-      diameter="36">
-    </mat-progress-spinner>
+  class="d-flex justify-content-center btn-action">
+  <mat-progress-spinner color="primary"
+    mode="indeterminate"
+    diameter="36">
+  </mat-progress-spinner>
 </div>
-<div *ngIf="!isLoading" class="MainPageElement mp-green">
+<div *ngIf="!isLoading"
+  class="d-flex justify-content-center align-items-center">
   <div class="mp-banner">
     <h2><span class="mw-headline"
         id="Featured_Pok.C3.A9mon">Featured Pokémon</span></h2>
     <div class="caption">
-      <table style="border:1px solid; text-align:left; margin-bottom:20px; width:250px">
+      <table style="border: groove; text-align:left; margin-bottom:20px; width:100%">
         <tbody>
           <tr>
-            <td>
+            <td class="d-flex flex-grow-1">
+            </td>
+            <td class="d-flex flex-grow-1">
             </td>
           </tr>
-          <tr>
+          <tr style="place-content: center;">
             <td>
               <div class="center">
-                <img src="{{ detail.sprites.front_default }}" alt="">
+                <img src="{{ detail.sprites.front_default }}"
+                  alt="">
               </div>
             </td>
           </tr>
-          <tr style="text-transform: capitalize;">
-            <b>Name:</b>  {{ detail.name }}
-          </tr>
-          <tr>
-            <td><b>Height:</b> {{ detail.height }}
+          <tr style="text-transform: capitalize; border: groove;">
+            <td style="width: 50%; text-align: right;">
+              <b>Name:</b>
+            </td>
+            <td style="width: 50%;">
+              {{ detail.name }}
             </td>
           </tr>
-          <tr>
-            <td><b>Weight:</b> {{ detail.weight }}
+          <tr style="border: groove;">
+            <td style="width: 50%;">
+              <b>Height:</b>
+            </td>
+            <td style="width: 50%;">
+              {{ detail.height }}
             </td>
           </tr>
-          <tr>
-            <td><b>Type(s):</b> 
-                <ul style="margin: 0;">
-                    <li *ngFor="let data of detail.types" style="text-transform: capitalize;">
-                        {{data.type.name}}
-                    </li>
-                </ul>
-                <!-- <span *ngFor="let data of detail.types" style="text-transform: capitalize;">
-                    {{data.type.name}}
-                </span> -->
+          <tr style="border: groove;">
+            <td style="width: 50%;">
+              <b>Weight:</b>
+            </td>
+            <td style="width: 50%;">
+              {{ detail.weight }}
             </td>
           </tr>
-          <tr>
-            <td> <b>Abilities:</b> 
-                <ul style="margin: 0;">
-                    <li *ngFor="let data of detail.abilities" style="text-transform: capitalize;">
-                        {{data.ability.name}}
-                    </li>
-                </ul>
-                <!-- <span *ngFor="let data of detail.abilities" style="text-transform: capitalize;">
-                    {{data.ability.name}}
-                </span> -->
+          <tr style="border: groove;">
+            <td style="width: 50%;">
+              <b>Type(s):</b>
+            </td>
+            <td style="width: 50%;">
+              <ul style="margin: 0; padding-left: 20px;">
+                <li *ngFor="let data of detail.types"
+                  style="text-transform: capitalize;">
+                  {{data.type.name}}
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr style="border: groove;">
+            <td style="width: 50%;">
+              <b>Abilities:</b>
+            </td>
+            <td style="width: 50%;">
+              <ul style="margin: 0; padding-left: 20px;">
+                <li *ngFor="let data of detail.abilities"
+                  style="text-transform: capitalize;">
+                  {{data.ability.name}}
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr style="border: groove;">
+            <td colspan="2" style="width: 100%;">
+              <table style="width: 100%;">
+                <tbody>
+                  <tr>
+                    <td style="width: 50%;">
+                      <b>Stats:</b>
+                    </td>
+                    <td style="width: 50%;">
+                    </td>
+                  </tr>
+                  <tr *ngFor="let data of detail.stats">
+                    <td style="width: 50%;">
+                      {{ data.stat.name }}
+                    </td>
+                    <td class="d-flex" style="width: 50%; align-items: center;">
+                      <mat-progress-bar mode="determinate" value="{{ data.base_stat }}"></mat-progress-bar> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </td>
           </tr>
         </tbody>

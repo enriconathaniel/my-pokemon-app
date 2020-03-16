@@ -20,7 +20,6 @@ export class DetailComponent implements OnInit {
       (data: any) => {
       this.detail = data;
       this.isLoading = false;
-      console.log(this.detail);
     });
   }
 
